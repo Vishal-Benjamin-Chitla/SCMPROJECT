@@ -151,4 +151,34 @@ function filterEvents(genre = "all") {
 }
 filterEvents();
 
+// --- Modal Registration Form Logic ---
+function openRegister(idx) {
+  const ev = events[idx];
+  const modal = document.getElementById('eventModal');
+  const content = document.getElementById('modalContent');
+  content.innerHTML = `
+    <button class="modal-close" id="modalClose">&times;</button>
+    <h2>Register for ${ev.title}</h2>
+    <form id="regForm" autocomplete="off" novalidate>
+      <label for="name">Full Name</label>
+      <input type="text" id="name" name="name" required placeholder="Your Name">
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="email" required placeholder="you@email.com">
+      <label for="ticket">Ticket Type</label>
+      <select id="ticket" name="ticket" required>
+        <option value="">Select ticket</option>
+        <option value="General">General Admission</option>
+        <option value="VIP">VIP</option>
+        <option value="Student">Student</option>
+      </select>
+      <div class="form-actions">
+        <button type="button" onclick="closeModal()">Cancel</button>
+        <button type="submit" id="submitBtn">Register</button>
+      </div>
+      <div class="form-error" id="formError" style="display:none;"></div>
+    </form>
+  `;
+  modal.classList.add('active');
+  document.getElementById('modalClose').onclick = closeModal;
+  modal.onclick = (e) => { if(e.target === modal) closeModal(); };
 
