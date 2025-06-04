@@ -51,7 +51,7 @@ const events = [
     desc: "A charity concert supporting local communities. Enjoy live performances and help feed Bengaluru.",
   },
   {
-    title: "Startup Connect 2025",
+    title: "Startup 2025",
     date: "25 July 2025",
     location: "Tech Park Convention Center",
     genre: "business",
