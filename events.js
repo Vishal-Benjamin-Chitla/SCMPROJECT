@@ -181,4 +181,37 @@ function openRegister(idx) {
   modal.classList.add('active');
   document.getElementById('modalClose').onclick = closeModal;
   modal.onclick = (e) => { if(e.target === modal) closeModal(); };
+ // Form validation and submission
+  const form = document.getElementById('regForm');
+  form.onsubmit = function(e) {
+    e.preventDefault();
+    const name = form.name.value.trim();
+    const email = form.email.value.trim();
+    const ticket = form.ticket.value;
+    const errorDiv = document.getElementById('formError');
+    errorDiv.style.display = 'none';
+    if(!name || !email || !ticket) {
+      errorDiv.textContent = "All fields are required.";
+      errorDiv.style.display = 'block';
+      return;
+    }
+    if(!/^[a-zA-Z ]{2,}$/.test(name)) {
+      errorDiv.textContent = "Please enter a valid name.";
+      errorDiv.style.display = 'block';
+      return;
+    }
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      errorDiv.textContent = "Please enter a valid email address.";
+      errorDiv.style.display = 'block';
+      return;
+    }
+    form.style.display = 'none';
+    content.innerHTML += <div class="form-success">Thank you, ${name}!<br>Your ticket for <b>${ev.title}</b> is confirmed.<br>Check your email for details.</div>;
+    setTimeout(closeModal, 2500);
+  };
+}
+window.openRegister = openRegister;
 
+function closeModal() {
+  document.getElementById('eventModal').classList.remove('active');
+}
